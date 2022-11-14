@@ -1,43 +1,31 @@
-let clock = () => 
+function Time()
 {
-    let date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-   
-  
+    var date = new  Date();
+    var hour = date.getHours();            // 0 - 23 
+    var minute = date.getMinutes();                      //0 - 59
+    var second = date.getSeconds();                                     // 0 - 59
+    var session = "AM";
 
-// AM amd PM process ....................... ..........
-let period = "AM";
-if (hours == 0) hours = 12;
+    if(hour == 0)
+    {
+        hour = 12 ;
+    }
+    if( hour >12 )
+    {
+        hour = hour - 12;
+        session = "PM";
+    }
+    
+    hour = ( hour < 10 ) ? "0" + hour : hour;
+    minute = (minute < 10) ? "0" + minute : minute;
+    second = (second < 10) ? "0" + second : second;
 
-if( hours > 12)
-{
-    hours = hours - 12;
-    period = "PM";
+    var time = hour  + ":" + minute +  ":" + second + " " + session ;
+
+    document.getElementById("clock").innerText = time;
+    document.getElementById("clock").textContent = time;
+
+      setTimeout(Time, 1000);
+
 }
-
-
-hours = hours < 10 ? `${hours} `+hours : hours;
-minutes = minutes < 10 ? `0${minutes}`+ minutes : minutes;
-seconds = seconds < 10 ? `0${seconds}`+ seconds : seconds;
-
-
-
-let time = `   ${hours}     :     ${minutes}   :     ${seconds}  :     ${period}`
-document.getElementById("clock").innerText = time ;
-
-console.log(time);
-};
- 
-// calling the clock function ...........
-clock();
-
-
-
-
-
-
-// Date setup .............
-
-document.getElementById("date").innerHTML = Date();
+Time();
